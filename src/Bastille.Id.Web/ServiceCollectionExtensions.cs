@@ -37,6 +37,7 @@ namespace Bastille.Id.Web
     using Microsoft.IdentityModel.Protocols.OpenIdConnect;
     using Microsoft.IdentityModel.Tokens;
     using Newtonsoft.Json;
+    using Serilog;
     using Talegen.Common.Core.Extensions;
     using Vasont.AspnetCore.RedisClient;
 
@@ -50,10 +51,9 @@ namespace Bastille.Id.Web
         /// </summary>
         /// <param name="services">The services to extend.</param>
         /// <param name="minimumCompletionPortThreads">The minimum completion ports to set. Default is 0 which ignores this operation.</param>
-        /// <param name="logger">Contains an optional logger for debugging.</param>
         /// <returns>Returns the services collection.</returns>
         /// <exception cref="ArgumentNullException">Exception is thrown if <paramref name="services" /> is null.</exception>
-        public static IServiceCollection ConfigureServerThreads(this IServiceCollection services, int minimumCompletionPortThreads = 0, ILogger logger = null)
+        public static IServiceCollection ConfigureServerThreads(this IServiceCollection services, int minimumCompletionPortThreads = 0)
         {
             if (services == null)
             {
@@ -65,8 +65,8 @@ namespace Bastille.Id.Web
                 // setup threading
                 ThreadPool.GetMinThreads(out int workerThreads, out int completionPortThreads);
                 ThreadPool.SetMinThreads(workerThreads * 2, completionPortThreads > minimumCompletionPortThreads ? completionPortThreads : minimumCompletionPortThreads);
-                logger?.LogDebug("Current Minimum Threads to workerThreads={0}, completion Ports={1}", workerThreads, completionPortThreads);
-                logger?.LogDebug("Setting Minimum Threads to workerThreads={0}, completion Ports={1}", workerThreads * 2, completionPortThreads > minimumCompletionPortThreads ? completionPortThreads : minimumCompletionPortThreads);
+                Log.Debug("Current Minimum Threads to workerThreads={0}, completion Ports={1}", workerThreads, completionPortThreads);
+                Log.Debug("Setting Minimum Threads to workerThreads={0}, completion Ports={1}", workerThreads * 2, completionPortThreads > minimumCompletionPortThreads ? completionPortThreads : minimumCompletionPortThreads);
             }
 
             return services;
@@ -109,13 +109,12 @@ namespace Bastille.Id.Web
         /// </summary>
         /// <param name="services">The services.</param>
         /// <param name="webServerSecurityOptions">The options.</param>
-        /// <param name="logger">The logger.</param>
         /// <param name="development">Contains a value indicating whether the application is in a dev environment.</param>
         /// <returns>Returns the service collection.</returns>
         /// <exception cref="ArgumentNullException">
         /// Exception thrown if <paramref name="services" /> or <paramref name="webServerSecurityOptions" /> are null.
         /// </exception>
-        public static IServiceCollection AddWebServerSecurity(this IServiceCollection services, WebServerSecurityOptions webServerSecurityOptions, ILogger logger = null, bool development = false)
+        public static IServiceCollection AddWebServerSecurity(this IServiceCollection services, WebServerSecurityOptions webServerSecurityOptions, bool development = false)
         {
             if (services == null)
             {
@@ -227,7 +226,7 @@ namespace Bastille.Id.Web
                         // when a message is received...
                         OnMessageReceived = messageContext =>
                         {
-                            logger?.LogDebug(Properties.Resources.DebugOpenIdMessageRecievedMessageText, JsonConvert.SerializeObject(messageContext.ProtocolMessage));
+                            Log.Debug(Properties.Resources.DebugOpenIdMessageRecievedMessageText, JsonConvert.SerializeObject(messageContext.ProtocolMessage));
                             return Task.CompletedTask;
                         },
 
@@ -235,14 +234,14 @@ namespace Bastille.Id.Web
                         // and validated the identity token
                         OnTokenResponseReceived = validatedContext =>
                         {
-                            logger?.LogDebug("Validation OnTokenResponseReceived");
+                            Log.Debug("Validation OnTokenResponseReceived");
 
                             // store both access and refresh token in the claims - hence in the cookie
                             ClaimsIdentity identity = validatedContext.Principal.Identity as ClaimsIdentity;
 
                             if (!string.IsNullOrEmpty(validatedContext.TokenEndpointResponse.AccessToken))
                             {
-                                logger?.LogDebug("OnTokenValidated: AccessToken = {0}", validatedContext.TokenEndpointResponse.AccessToken);
+                                Log.Debug("OnTokenValidated: AccessToken = {0}", validatedContext.TokenEndpointResponse.AccessToken);
                                 identity.AddClaim(new Claim("access_token", validatedContext.TokenEndpointResponse.AccessToken));
                             }
 
@@ -252,7 +251,7 @@ namespace Bastille.Id.Web
 
                             if (!string.IsNullOrEmpty(refreshToken))
                             {
-                                logger?.LogDebug("OnTokenValidated: RefreshToken = {0}", refreshToken);
+                                Log.Debug("OnTokenValidated: RefreshToken = {0}", refreshToken);
                                 identity.AddClaim(new Claim("refresh_token", refreshToken));
                             }
 
@@ -313,7 +312,7 @@ namespace Bastille.Id.Web
         /// </summary>
         /// <param name="services">The services to extend.</param>
         /// <param name="authorityUri">The Identity Provider Authority URI.</param>
-        /// <remarks>Do not call directly if calling <see cref="AddWebServerSecurity(IServiceCollection, WebServerSecurityOptions, ILogger, bool)" />.</remarks>
+        /// <remarks>Do not call directly if calling <see cref="AddWebServerSecurity(IServiceCollection, WebServerSecurityOptions, bool)" />.</remarks>
         /// <exception cref="ArgumentNullException">Exception is thrown if <paramref name="services" /> or <paramref name="authorityUri" /> are null.</exception>
         public static void AddDiscoveryCache(this IServiceCollection services, Uri authorityUri)
         {
@@ -345,7 +344,7 @@ namespace Bastille.Id.Web
         /// <param name="options">The options.</param>
         /// <param name="redisConfig">Contains an optional redis configuration string.</param>
         /// <returns>Returns the service collection.</returns>
-        /// <remarks>Do not call directly if calling <see cref="AddWebServerSecurity(IServiceCollection, WebServerSecurityOptions, ILogger, bool)" />.</remarks>
+        /// <remarks>Do not call directly if calling <see cref="AddWebServerSecurity(IServiceCollection, WebServerSecurityOptions, bool)" />.</remarks>
         /// <exception cref="ArgumentNullException">Exception thrown if <paramref name="services" /> or <paramref name="options" /> are null.</exception>
         public static IServiceCollection AddLogoutBackchannelManagement(this IServiceCollection services, IdentityProviderOptions options, string redisConfig = "")
         {

@@ -26,6 +26,7 @@ namespace Bastille.Id.Web.Security
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.Extensions.Logging;
     using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+    using Serilog;
 
     /// <summary>
     /// This class contains cookie validation handler methods for OIDC related authentication.
@@ -43,11 +44,6 @@ namespace Bastille.Id.Web.Security
         private readonly IDiscoveryCache discoveryCache;
 
         /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILogger logger;
-
-        /// <summary>
         /// The options.
         /// </summary>
         private readonly CookieHandlerOptions options;
@@ -58,13 +54,11 @@ namespace Bastille.Id.Web.Security
         /// <param name="options">Contains the application settings.</param>
         /// <param name="logoutSessions">Contains the logout session manager.</param>
         /// <param name="discoveryCache">Contains an instance of the discovery cache.</param>
-        /// <param name="logger">Contains an instance of a logger.</param>
-        public CookieEventHandler(CookieHandlerOptions options, LogoutSessionManager logoutSessions, IDiscoveryCache discoveryCache, ILogger logger)
+        public CookieEventHandler(CookieHandlerOptions options, LogoutSessionManager logoutSessions, IDiscoveryCache discoveryCache)
         {
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.logoutSessions = logoutSessions ?? throw new ArgumentNullException(nameof(logoutSessions));
             this.discoveryCache = discoveryCache;
-            this.logger = logger;
         }
 
         /// <summary>
@@ -75,7 +69,7 @@ namespace Bastille.Id.Web.Security
         /// <returns>Returns a task.</returns>
         public override async Task ValidatePrincipal(CookieValidatePrincipalContext context)
         {
-            this.logger?.LogDebug(Properties.Resources.DebugCookieTokenValidateProcessCheckMessageText);
+            Log.Debug(Properties.Resources.DebugCookieTokenValidateProcessCheckMessageText);
 
             // since our cookie lifetime is based on the access token one, check if we're more than halfway of the cookie lifetime
             bool signedOut = false;
@@ -85,8 +79,8 @@ namespace Bastille.Id.Web.Security
             Claim accessTokenClaim = identity.FindFirst("access_token");
             Claim refreshTokenClaim = identity.FindFirst("refresh_token");
 
-            this.logger?.LogDebug("Cookie OnValidatePrincipal: Access Token: {0}", accessTokenClaim.Value);
-            this.logger?.LogDebug("Cookie OnValidatePrincipal: Refresh Token: {0}", refreshTokenClaim.Value);
+            Log.Debug("Cookie OnValidatePrincipal: Access Token: {0}", accessTokenClaim.Value);
+            Log.Debug("Cookie OnValidatePrincipal: Refresh Token: {0}", refreshTokenClaim.Value);
 
             // at first, determine if user has been logged out...
             if (identity.IsAuthenticated)
@@ -120,7 +114,7 @@ namespace Bastille.Id.Web.Security
                 // if the certificate has gone stale...
                 if (!validToken)
                 {
-                    this.logger?.LogDebug(Properties.Resources.DebugCookieTokenRefreshProcessMessageText);
+                    Log.Debug(Properties.Resources.DebugCookieTokenRefreshProcessMessageText);
 
                     try
                     {
@@ -130,7 +124,7 @@ namespace Bastille.Id.Web.Security
                         // retrieve discovery
                         DiscoveryDocumentResponse discovery = await this.discoveryCache.GetAsync().ConfigureAwait(false);
                         string tokenEndpoint = this.options.UseDiscovery && discovery != null ? discovery.TokenEndpoint : new Uri(this.options.AuthorityUri, "/connect/token").ToString();
-                        this.logger?.LogDebug(Properties.Resources.DebugCookieTokenEndpointUsedMessageText, tokenEndpoint);
+                        Log.Debug(Properties.Resources.DebugCookieTokenEndpointUsedMessageText, tokenEndpoint);
 
                         // create a new Http Client
                         using (HttpClient client = new HttpClient())
@@ -153,7 +147,7 @@ namespace Bastille.Id.Web.Security
                             // if there was no error in communicating with authority for refresh...
                             if (!response.IsError)
                             {
-                                this.logger?.LogDebug(Properties.Resources.DebugCookieTokenRefreshSuccessMessageText, response.AccessToken, response.RefreshToken);
+                                Log.Debug(Properties.Resources.DebugCookieTokenRefreshSuccessMessageText, response.AccessToken, response.RefreshToken);
 
                                 // everything went right, remove old tokens and add new ones
                                 identity.RemoveClaim(accessTokenClaim);
@@ -171,7 +165,7 @@ namespace Bastille.Id.Web.Security
                             }
                             else
                             {
-                                this.logger?.LogError(
+                                Log.Error(
                                     Properties.Resources.DebugCookieTokenRefreshFailedMessageText,
                                     response.Error,
                                     response.ErrorDescription,
@@ -182,12 +176,12 @@ namespace Bastille.Id.Web.Security
                     }
                     catch (Exception ex)
                     {
-                        this.logger?.LogError(ex, Properties.Resources.DebugCookieTokenRefreshExceptionErrorText);
+                        Log.Error(ex, Properties.Resources.DebugCookieTokenRefreshExceptionErrorText);
                     }
                 }
                 else
                 {
-                    this.logger?.LogDebug(Properties.Resources.DebugCookieTokenValidTokenMessageText);
+                    Log.Debug(Properties.Resources.DebugCookieTokenValidTokenMessageText);
                 }
             }
         }
@@ -227,11 +221,11 @@ namespace Bastille.Id.Web.Security
                             // if there was no error in communicating with authority for refresh...
                             if (!response.IsError)
                             {
-                                this.logger?.LogDebug("Refresh token revoked successfully.");
+                                Log.Debug("Refresh token revoked successfully.");
                             }
                             else
                             {
-                                this.logger?.LogWarning(
+                                Log.Warning(
                                     response.Exception,
                                     "Refresh token revocation failed. {0} {1} {2}",
                                     response.Error,
@@ -244,7 +238,7 @@ namespace Bastille.Id.Web.Security
             }
             catch (Exception ex)
             {
-                this.logger?.LogError(ex, "An error occurred during refresh token revocation");
+                Log.Error(ex, "An error occurred during refresh token revocation");
             }
         }
     }

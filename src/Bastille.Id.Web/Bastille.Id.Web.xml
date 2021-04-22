@@ -360,24 +360,18 @@
             This contains the discovery cache.
             </summary>
         </member>
-        <member name="F:Bastille.Id.Web.Security.CookieEventHandler.logger">
-            <summary>
-            The logger.
-            </summary>
-        </member>
         <member name="F:Bastille.Id.Web.Security.CookieEventHandler.options">
             <summary>
             The options.
             </summary>
         </member>
-        <member name="M:Bastille.Id.Web.Security.CookieEventHandler.#ctor(Bastille.Id.Web.Security.CookieHandlerOptions,Bastille.Id.Web.Security.LogoutSessionManager,IdentityModel.Client.IDiscoveryCache,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Bastille.Id.Web.Security.CookieEventHandler.#ctor(Bastille.Id.Web.Security.CookieHandlerOptions,Bastille.Id.Web.Security.LogoutSessionManager,IdentityModel.Client.IDiscoveryCache)">
             <summary>
             Initializes a new instance of the <see cref="T:Bastille.Id.Web.Security.CookieEventHandler" /> class.
             </summary>
             <param name="options">Contains the application settings.</param>
             <param name="logoutSessions">Contains the logout session manager.</param>
             <param name="discoveryCache">Contains an instance of the discovery cache.</param>
-            <param name="logger">Contains an instance of a logger.</param>
         </member>
         <member name="M:Bastille.Id.Web.Security.CookieEventHandler.ValidatePrincipal(Microsoft.AspNetCore.Authentication.Cookies.CookieValidatePrincipalContext)">
             <summary>
@@ -447,13 +441,12 @@
             This class contains extension methods for supporting ASP.net Core Web Applications using an OpenID Identity Provider like Bastille.ID.
             </summary>
         </member>
-        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.ConfigureServerThreads(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,Microsoft.Extensions.Logging.ILogger)">
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.ConfigureServerThreads(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32)">
             <summary>
             Changes the defaults for server threads and completion ports for the application.
             </summary>
             <param name="services">The services to extend.</param>
             <param name="minimumCompletionPortThreads">The minimum completion ports to set. Default is 0 which ignores this operation.</param>
-            <param name="logger">Contains an optional logger for debugging.</param>
             <returns>Returns the services collection.</returns>
             <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> is null.</exception>
         </member>
@@ -466,13 +459,12 @@
             <returns>Returns the services collection.</returns>
             <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> is null.</exception>
         </member>
-        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,System.Boolean)">
             <summary>
             Configures the web server security.
             </summary>
             <param name="services">The services.</param>
             <param name="webServerSecurityOptions">The options.</param>
-            <param name="logger">The logger.</param>
             <param name="development">Contains a value indicating whether the application is in a dev environment.</param>
             <returns>Returns the service collection.</returns>
             <exception cref="T:System.ArgumentNullException">
@@ -485,7 +477,7 @@
             </summary>
             <param name="services">The services to extend.</param>
             <param name="authorityUri">The Identity Provider Authority URI.</param>
-            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)" />.</remarks>
+            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,System.Boolean)" />.</remarks>
             <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> or <paramref name="authorityUri" /> are null.</exception>
         </member>
         <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddLogoutBackchannelManagement(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.IdentityProviderOptions,System.String)">
@@ -496,7 +488,7 @@
             <param name="options">The options.</param>
             <param name="redisConfig">Contains an optional redis configuration string.</param>
             <returns>Returns the service collection.</returns>
-            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)" />.</remarks>
+            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,System.Boolean)" />.</remarks>
             <exception cref="T:System.ArgumentNullException">Exception thrown if <paramref name="services" /> or <paramref name="options" /> are null.</exception>
         </member>
         <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.DisallowsSameSiteNone(System.String)">
