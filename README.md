@@ -1,9 +1,9 @@
 # Bastille.Id.Web
 Helps with Creating Protected Web Apps and Web API with Bastille.ID Identity Platform
 
-This repository ([Bastille.Id.Web](https://github.com/Bastille-ID/Bastille.Id.Web)) is where we (Talegen) lead the development and maintenance of the Bastille.ID Core library. The source code here is available to everyone under the standard [Apache 2.0 license](https://github.com/Talegen/Talegen.AspNetCore.hCAPTCHA/blob/main/LICENSE).
+This repository ([Bastille.Id.Web](https://github.com/Bastille-ID/Bastille.Id.Web)) is where we (Talegen) lead the development and maintenance of the Bastille.ID Web library. The source code here is available to everyone under the standard [Apache 2.0 license](https://github.com/Talegen/Talegen.AspNetCore.hCAPTCHA/blob/main/LICENSE).
 
-The purpose of this library is to provide common UI pages for protecting Razor-page Web Applications built with ASP.net Core, and any related additional projects that need to interact with the Bastille.ID IdP. 
+The purpose of this library is to provide common UI pages for protecting Razor-page Web Applications built with ASP.net Core, and any related additional projects that need to interact with the Bastille.ID Identity Platform. 
 
 ## Contributing
 
