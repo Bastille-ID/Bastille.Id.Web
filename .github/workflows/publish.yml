@@ -22,7 +22,13 @@ jobs:
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: src/Bastille.Id.Web/Bastille.Id.Web.csproj
+          
+          # Flag to toggle git tagging, enabled by default
+          # TAG_COMMIT: true
 
+          # Format of the git tag, [*] gets replaced with actual version
+          TAG_FORMAT: Web-v*
+          
           # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
 
@@ -33,6 +39,9 @@ jobs:
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: src/Bastille.Id.Web.UI/Bastille.Id.Web.UI.csproj
-
+          
+          # Format of the git tag, [*] gets replaced with actual version
+          TAG_FORMAT: Web-UI-v*
+          
           # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
