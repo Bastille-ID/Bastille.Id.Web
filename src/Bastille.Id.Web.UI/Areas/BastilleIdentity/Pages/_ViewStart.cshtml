@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+
+@{ ViewEngineResult result = Engine.FindView(ViewContext, "_Layout", isMainPage: false);
+
+    if (result.Success)
+    {
+        Layout = "_Layout";
+    } }

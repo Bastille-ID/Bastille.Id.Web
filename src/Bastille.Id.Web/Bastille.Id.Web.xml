@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bastille.Id.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation">
+            <summary>
+            Information about the App Services configuration on the host.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthEnabledEnvironmentVariable">
+            <summary>
+            The application services authentication enabled environment variable.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthOpenIdIssuerEnvironmentVariable">
+            <summary>
+            The application services authentication open identifier issuer environment variable.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthClientIdEnvironmentVariable">
+            <summary>
+            The application services authentication client identifier environment variable.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthClientSecretEnvironmentVariable">
+            <summary>
+            The application services authentication client secret environment variable.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthLogoutPathEnvironmentVariable">
+            <summary>
+            The application services authentication logout path environment variable.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthIdTokenHeader">
+            <summary>
+            The application services authentication identifier token header.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthIdpTokenHeader">
+            <summary>
+            The application services authentication idp token header.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.AppServicesAuthDebugHeadersEnvironmentVariable">
+            <summary>
+            The application services authentication debug headers environment variable.
+            </summary>
+            <remarks>Artificially added by library to help debugging App Services. See the Debug controller of the test app.</remarks>
+        </member>
+        <member name="P:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.IsAppServicesAuthenticationEnabled">
+            <summary>
+            Gets a value indicating whether this instance is application services authentication enabled.
+            </summary>
+            <value><c>true</c> if this instance is application services authentication enabled; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.LogoutUrl">
+            <summary>
+            Gets the Logout URL for App Services Auth web sites.
+            </summary>
+            <value>The logout URL.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.ClientId">
+            <summary>
+            Gets the ClientID of the App Services Auth web site.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.ClientSecret">
+            <summary>
+            Gets the client secret of the App Services Auth web site.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.Issuer">
+            <summary>
+            Gets the Issuer of the App Services Auth web site.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.SimulateGetttingHeaderFromDebugEnvironmentVariable(System.String)">
+            <summary>
+            Simulates the gettting header from debug environment variable.
+            </summary>
+            <param name="header">The header.</param>
+            <returns>Returns the environment variable value.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.GetIdToken(System.Collections.Generic.IDictionary{System.String,Microsoft.Extensions.Primitives.StringValues})">
+            <summary>
+            Get the ID token from the headers sent by App services authentication.
+            </summary>
+            <param name="headers">Headers.</param>
+            <returns>The ID Token.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.GetIdp(System.Collections.Generic.IDictionary{System.String,Microsoft.Extensions.Primitives.StringValues})">
+            <summary>
+            Get the IDP from the headers sent by App services authentication.
+            </summary>
+            <param name="headers">Headers.</param>
+            <returns>The IDP.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation.GetUser(System.Collections.Generic.IDictionary{System.String,Microsoft.Extensions.Primitives.StringValues})">
+            <summary>
+            Get the user claims from the headers and environment variables.
+            </summary>
+            <param name="headers">Headers.</param>
+            <returns>User claims.</returns>
+        </member>
+        <member name="T:Bastille.Id.Web.BastilleIdentityOptions">
+            <summary>
+            This class represents the identity options for the Bastille Identity Web App library.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Identity.IdentityOptions" />
+        </member>
+        <member name="P:Bastille.Id.Web.BastilleIdentityOptions.EditProfilePolicyId">
+            <summary>
+            Gets or sets the edit profile user flow name for B2C, e.g. b2c_1_edit_profile.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.BastilleIdentityOptions.SignUpSignInPolicyId">
+            <summary>
+            Gets or sets the sign up or sign in user flow name for B2C, e.g. b2c_1_susi.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.BastilleIdentityOptions.ResetPasswordPolicyId">
+            <summary>
+            Gets or sets the reset password user flow name for B2C, e.g. B2C_1_password_reset.
+            </summary>
+        </member>
+        <member name="T:Bastille.Id.Web.Constants">
+            <summary>
+            This class contains constants used within the Bastille Identity Web App libraries.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.LoginHint">
+            <summary>
+            LoginHint. Represents the preferred_username claim in the ID token.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.DomainHint">
+            <summary>
+            DomainHint. Determined by the tenant Id.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Claims">
+            <summary>
+            Claims. Determined from the signed-in user.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Bearer">
+            <summary>
+            Bearer. Predominant type of access token used with OAuth 2.0.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.BastilleId">
+            <summary>
+            Configuration section name for Bastille.ID.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Scope">
+            <summary>
+            Scope.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Policy">
+            <summary>
+            Policy for B2C user flows. The name of the policy to check against a specific user flow.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Version">
+            <summary>
+            Register Valid Audience.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.V1">
+            <summary>
+            Version 1.0.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.V2">
+            <summary>
+            Version 2.0.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.NameClaim">
+            <summary>
+            The name claim.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Consent">
+            <summary>
+            The consent claim.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.ConsentUrl">
+            <summary>
+            The consent URI claim.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.Scopes">
+            <summary>
+            The scopes claim.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.PreferredUserName">
+            <summary>
+            The preferred user name claim.
+            </summary>
+        </member>
+    </members>
+</doc>

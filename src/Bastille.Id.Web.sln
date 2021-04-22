@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bastille.Id.Web", "Bastille.Id.Web\Bastille.Id.Web.csproj", "{3505FD37-F8B4-46C2-8650-C365B279AD21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bastille.Id.Web.UI", "Bastille.Id.Web.UI\Bastille.Id.Web.UI.csproj", "{CBD4CAA4-BDAB-4FA1-B8BF-E4C9757D5688}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3505FD37-F8B4-46C2-8650-C365B279AD21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3505FD37-F8B4-46C2-8650-C365B279AD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3505FD37-F8B4-46C2-8650-C365B279AD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3505FD37-F8B4-46C2-8650-C365B279AD21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD4CAA4-BDAB-4FA1-B8BF-E4C9757D5688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD4CAA4-BDAB-4FA1-B8BF-E4C9757D5688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD4CAA4-BDAB-4FA1-B8BF-E4C9757D5688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD4CAA4-BDAB-4FA1-B8BF-E4C9757D5688}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87050F84-D0D1-4815-9E59-4F63D28E0070}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bastille.Id.Web.UI</name>
+    </assembly>
+    <members>
+        <member name="T:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController">
+            <summary>
+            Controller used in web apps to manage accounts.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.options">
+            <summary>
+            Contains the identity options.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.#ctor(Microsoft.Extensions.Options.IOptions{Bastille.Id.Web.BastilleIdentityOptions})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController" /> class.
+            </summary>
+            <param name="bastilleIdentityOptions">The bastille identity options.</param>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.SignIn(System.String)">
+            <summary>
+            Handles user sign in.
+            </summary>
+            <param name="scheme">Authentication scheme.</param>
+            <returns>Challenge generating a redirect to Azure AD to sign in the user.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.Challenge(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Challenges the user.
+            </summary>
+            <param name="redirectUri">Redirect URI.</param>
+            <param name="scope">Scopes to request.</param>
+            <param name="loginHint">Login hint.</param>
+            <param name="domainHint">Domain hint.</param>
+            <param name="claims">Claims.</param>
+            <param name="policy">AAD B2C policy.</param>
+            <returns>Challenge generating a redirect to Azure AD to sign in the user.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.SignOut(System.String)">
+            <summary>
+            Represents an event that is raised when the sign-out operation is complete.
+            </summary>
+            <param name="scheme">Authentication scheme.</param>
+            <returns>Sign out result.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.ResetPassword(System.String)">
+            <summary>
+            In B2C applications handles the Reset password policy.
+            </summary>
+            <param name="scheme">Authentication scheme.</param>
+            <returns>Challenge generating a redirect to Azure AD B2C.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers.AccountController.EditProfile(System.String)">
+            <summary>
+            In B2C applications, handles the Edit Profile policy.
+            </summary>
+            <param name="scheme">Authentication scheme.</param>
+            <returns>Challenge generating a redirect to Azure AD B2C.</returns>
+        </member>
+        <member name="T:Bastille.Id.Web.UI.BastilleIdentityAccountControllerFeatureProvider">
+            <summary>
+            This class contains methods for populating web app features.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1" />
+        </member>
+        <member name="M:Bastille.Id.Web.UI.BastilleIdentityAccountControllerFeatureProvider.PopulateFeature(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPart},Microsoft.AspNetCore.Mvc.Controllers.ControllerFeature)">
+            <summary>
+            Updates the <paramref name="feature" /> instance.
+            </summary>
+            <param name="parts">The list of <see cref="T:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPart" /> instances in the application.</param>
+            <param name="feature">The feature instance to populate.</param>
+            <remarks>
+            <see cref="T:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPart" /> instances in <paramref name="parts" /> appear in the same ordered
+            sequence they are stored in <see cref="P:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager.ApplicationParts" />. This ordering may be
+            used by the feature provider to make precedence decisions.
+            </remarks>
+        </member>
+        <member name="T:Bastille.Id.Web.UI.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.AccessDeniedMessageText">
+            <summary>
+              Looks up a localized string similar to You do not have access to this resource..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.AccessDeniedTitleText">
+            <summary>
+              Looks up a localized string similar to Access denied.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.DetailsText">
+            <summary>
+              Looks up a localized string similar to Details.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.DevelopModeText">
+            <summary>
+              Looks up a localized string similar to Development Mode.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.ErrorMessageText">
+            <summary>
+              Looks up a localized string similar to An error occurred while processing your request..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.ErrorRequestIdLabelText">
+            <summary>
+              Looks up a localized string similar to Request ID.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.ErrorTitleText">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.SignedOutMessageText">
+            <summary>
+              Looks up a localized string similar to You have successfully signed out..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.UI.Properties.Resources.SignedOutTitleText">
+            <summary>
+              Looks up a localized string similar to Signed out.
+            </summary>
+        </member>
+        <member name="T:Bastille.Id.Web.UI.ServiceCollectionExtensions">
+            <summary>
+            Extension method on <see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder" /> to add UI for applications that integrate with the Bastille.ID Identity Platform.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.UI.ServiceCollectionExtensions.AddIdentityUI(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            Adds a controller and Razor pages for the accounts management.
+            </summary>
+            <param name="builder">MVC builder.</param>
+            <returns>MVC builder for chaining.</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.AccessDeniedModel">
+            <summary>
+            Page presenting the Access denied error.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.AccessDeniedModel.OnGet">
+            <summary>
+            Method handling the HTTP GET method.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel">
+            <summary>
+            Model for the Error page.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel.#ctor(Talegen.Common.Core.Errors.ErrorMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel" /> class.
+            </summary>
+            <param name="errorAccessor">Error message.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel.RequestId">
+            <summary>
+            This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel.ShowRequestId">
+            <summary>
+            This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel.Error">
+            <summary>
+            This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.ErrorModel.OnGet">
+            <summary>
+            This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.SignedOutModel">
+            <summary>
+            Model for the SignOut page.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Web.UI.Areas.MicrosoftIdentity.Pages.Account.SignedOutModel.OnGet">
+            <summary>
+            Method handling the HTTP GET method.
+            </summary>
+            <returns>A Sign Out page or Home page.</returns>
+        </member>
+    </members>
+</doc>
