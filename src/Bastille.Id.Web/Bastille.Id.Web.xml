@@ -4,6 +4,43 @@
         <name>Bastille.Id.Web</name>
     </assembly>
     <members>
+        <member name="T:Bastille.Id.Web.ApplicationBuilderExtensions">
+            <summary>
+            This class contains extension methods to help with the configuration of a web applcation.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.ApplicationBuilderExtensions.AddApplicationSecurity(Microsoft.AspNetCore.Builder.IApplicationBuilder,Bastille.Id.Web.ApplicationSecurityOptions,Microsoft.AspNetCore.Builder.HeaderPolicyCollection)">
+            <summary>
+            Adds the application security configuration to the Application builder on web app startup.
+            </summary>
+            <param name="app">The application builder to extend.</param>
+            <param name="appSecurityOptions">The application security options.</param>
+            <param name="headerPolicy">Contains an optional header policy to apply instead of the default built from settings in <paramref name="appSecurityOptions" />.</param>
+            <returns>Returns the application builder.</returns>
+            <exception cref="T:System.ArgumentNullException">Exception thrown if <paramref name="app" /> or <paramref name="appSecurityOptions" /> are null.</exception>
+        </member>
+        <member name="T:Bastille.Id.Web.ApplicationSecurityOptions">
+            <summary>
+            This class contains settings for application security configuration.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.ApplicationSecurityOptions.ForceSsl">
+            <summary>
+            Gets or sets a value indicating whether to always require SSL when optional.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.ApplicationSecurityOptions.CspAllowedOrigin">
+            <summary>
+            Gets or sets the CSP allowed origin.
+            </summary>
+            <value>The CSP allowed origin.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.ApplicationSecurityOptions.CspImageSources">
+            <summary>
+            Gets or sets the CSP image sources.
+            </summary>
+            <value>The CSP image sources.</value>
+        </member>
         <member name="T:Bastille.Id.Web.AppServices.AppServicesAuthenticationInformation">
             <summary>
             Information about the App Services configuration on the host.
@@ -205,6 +242,368 @@
             <summary>
             The preferred user name claim.
             </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Constants.CorsPolicyName">
+            <summary>
+            The cors policy name.
+            </summary>
+        </member>
+        <member name="T:Bastille.Id.Web.IdentityProviderOptions">
+            <summary>
+            This class contains settings used for communicating with the identity provider.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.IdentityProviderOptions.AuthorityUri">
+            <summary>
+            Gets or sets the authority URI.
+            </summary>
+            <value>The authority URI.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.IdentityProviderOptions.UseDiscovery">
+            <summary>
+            Gets or sets a value indicating whether to use the IdP discovery service.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.IdentityProviderOptions.ClientId">
+            <summary>
+            Gets or sets the client identifier.
+            </summary>
+            <value>The client identifier.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.IdentityProviderOptions.Secret">
+            <summary>
+            Gets or sets the secret.
+            </summary>
+            <value>The secret.</value>
+        </member>
+        <member name="T:Bastille.Id.Web.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenEndpointUsedMessageText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: Using token endpoint &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenInvalidMessageText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: Invalid Signout Backchannel Token!.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenRefreshExceptionErrorText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: An exception error occurred during an attempt to refresh the user&apos;s access token..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenRefreshFailedMessageText">
+             <summary>
+               Looks up a localized string similar to Cookie Event Handler: Access Token Refresh Gently Failed. The following reasons were reported below.
+            Error: {0}
+            Description: {1}
+            Type: {2}
+            Http Error Reason: {3}
+            .
+             </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenRefreshProcessMessageText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: Access Token Expired. Attempting Refresh..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenRefreshSuccessMessageText">
+             <summary>
+               Looks up a localized string similar to Cookie Event Handler: Access Token Refresh Successful.
+            access_token: {0}
+            refresh_token: {1}..
+             </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenValidateProcessCheckMessageText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: Checking Cookie Token is Valid.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugCookieTokenValidTokenMessageText">
+            <summary>
+              Looks up a localized string similar to Cookie Event Handler: The user cookie token was validated successfully and has not expired..
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.Properties.Resources.DebugOpenIdMessageRecievedMessageText">
+            <summary>
+              Looks up a localized string similar to OIDC Message: 
+               {0}.
+            </summary>
+        </member>
+        <member name="T:Bastille.Id.Web.Security.CookieEventHandler">
+            <summary>
+            This class contains cookie validation handler methods for OIDC related authentication.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Security.CookieEventHandler.logoutSessions">
+            <summary>
+            This contains an instance of logout session manager.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Security.CookieEventHandler.discoveryCache">
+            <summary>
+            This contains the discovery cache.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Security.CookieEventHandler.logger">
+            <summary>
+            The logger.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Security.CookieEventHandler.options">
+            <summary>
+            The options.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.CookieEventHandler.#ctor(Bastille.Id.Web.Security.CookieHandlerOptions,Bastille.Id.Web.Security.LogoutSessionManager,IdentityModel.Client.IDiscoveryCache,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bastille.Id.Web.Security.CookieEventHandler" /> class.
+            </summary>
+            <param name="options">Contains the application settings.</param>
+            <param name="logoutSessions">Contains the logout session manager.</param>
+            <param name="discoveryCache">Contains an instance of the discovery cache.</param>
+            <param name="logger">Contains an instance of a logger.</param>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.CookieEventHandler.ValidatePrincipal(Microsoft.AspNetCore.Authentication.Cookies.CookieValidatePrincipalContext)">
+            <summary>
+            This event is fired every time the cookie has been validated by the cookie middleware, during every authenticated request the decryption of the
+            cookie has already happened so we have access to the user claims and cookie properties - expiration, etc..
+            </summary>
+            <param name="context">Contains the context.</param>
+            <returns>Returns a task.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.CookieEventHandler.RevokeRefreshTokenAsync(System.String)">
+            <summary>
+            This method makes a call to revoke the refresh token.
+            </summary>
+            <param name="refreshToken">The refresh token to revoke.</param>
+            <returns>Contains a task.</returns>
+        </member>
+        <member name="T:Bastille.Id.Web.Security.CookieHandlerOptions">
+            <summary>
+            This class contains cookie event handler options.
+            </summary>
+        </member>
+        <member name="T:Bastille.Id.Web.Security.LogoutSessionManager">
+            <summary>
+            This class manages the logout session tracking.
+            </summary>
+        </member>
+        <member name="F:Bastille.Id.Web.Security.LogoutSessionManager.cache">
+            <summary>
+            Contains the cache service used to store logged out sessions sent from the backchannel.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.LogoutSessionManager.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bastille.Id.Web.Security.LogoutSessionManager" /> class.
+            </summary>
+            <param name="distributedCache">Contains the distributed cache mechanism.</param>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.LogoutSessionManager.AddAsync(System.String,System.String,System.Int32)">
+            <summary>
+            This method is used to add a logout session to the cache.
+            </summary>
+            <param name="sub">Contains the subject identity.</param>
+            <param name="sid">Contains the session identity.</param>
+            <param name="timeoutMinutes">Contains the timeout in minutes to store in cache.</param>
+            <returns>Returns a task.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.LogoutSessionManager.IsLoggedOutAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            This method is used to determine if a session was logged out.
+            </summary>
+            <param name="sub">Contains the subject identity.</param>
+            <param name="sid">Contains the session identity.</param>
+            <param name="cancellationToken">Contains a cancellation token.</param>
+            <returns>Returns a value indicating whether the session was logged out.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.Security.LogoutSessionManager.AddStringAsync(System.String,System.String,System.Int32)">
+            <summary>
+            This method is used to add a logout session to the cache.
+            </summary>
+            <param name="sub">Contains the subject identity.</param>
+            <param name="sid">Contains the session identity.</param>
+            <param name="timeoutMinutes">Contains the timeout in minutes to store in cache.</param>
+            <returns>Returns a task.</returns>
+        </member>
+        <member name="T:Bastille.Id.Web.ServiceCollectionExtensions">
+            <summary>
+            This class contains extension methods for supporting ASP.net Core Web Applications using an OpenID Identity Provider like Bastille.ID.
+            </summary>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.ConfigureServerThreads(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Changes the defaults for server threads and completion ports for the application.
+            </summary>
+            <param name="services">The services to extend.</param>
+            <param name="minimumCompletionPortThreads">The minimum completion ports to set. Default is 0 which ignores this operation.</param>
+            <param name="logger">Contains an optional logger for debugging.</param>
+            <returns>Returns the services collection.</returns>
+            <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> is null.</exception>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.ConfigureCookiePolicies(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Builder.CookiePolicyOptions)">
+            <summary>
+            Changes the cookie handling policy for the web application.
+            </summary>
+            <param name="services">The services to extend.</param>
+            <param name="cookiePolicyOptions">An optional cookie policy. If none specified, the common samesite cookie handling logic shall be implemented.</param>
+            <returns>Returns the services collection.</returns>
+            <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> is null.</exception>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+            <summary>
+            Configures the web server security.
+            </summary>
+            <param name="services">The services.</param>
+            <param name="webServerSecurityOptions">The options.</param>
+            <param name="logger">The logger.</param>
+            <param name="development">Contains a value indicating whether the application is in a dev environment.</param>
+            <returns>Returns the service collection.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Exception thrown if <paramref name="services" /> or <paramref name="webServerSecurityOptions" /> are null.
+            </exception>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddDiscoveryCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Uri)">
+            <summary>
+            This extension adds a discovery cache singlton for use by cookie services tracking federated sign-out and backchannel logout calls.
+            </summary>
+            <param name="services">The services to extend.</param>
+            <param name="authorityUri">The Identity Provider Authority URI.</param>
+            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)" />.</remarks>
+            <exception cref="T:System.ArgumentNullException">Exception is thrown if <paramref name="services" /> or <paramref name="authorityUri" /> are null.</exception>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.AddLogoutBackchannelManagement(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.IdentityProviderOptions,System.String)">
+            <summary>
+            Adds the logout backchannel handlers for cookie authenticated Web apps as well as refresh token handling.
+            </summary>
+            <param name="services">The services.</param>
+            <param name="options">The options.</param>
+            <param name="redisConfig">Contains an optional redis configuration string.</param>
+            <returns>Returns the service collection.</returns>
+            <remarks>Do not call directly if calling <see cref="M:Bastille.Id.Web.ServiceCollectionExtensions.AddWebServerSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Bastille.Id.Web.WebServerSecurityOptions,Microsoft.Extensions.Logging.ILogger,System.Boolean)" />.</remarks>
+            <exception cref="T:System.ArgumentNullException">Exception thrown if <paramref name="services" /> or <paramref name="options" /> are null.</exception>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.DisallowsSameSiteNone(System.String)">
+            <summary>
+            This method is called to handle the Chrome SameSite issue.
+            </summary>
+            <param name="userAgent">Contains the user agent string for the request.</param>
+            <returns>Returns a value indicating whether disallow same site none.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.HandleSameSiteCookieCompatibility(Microsoft.AspNetCore.Builder.CookiePolicyOptions)">
+            <summary>
+            Handles SameSite cookie issue the default list of user-agents that disallow SameSite None.
+            </summary>
+            <param name="options">Contains the cookie policy options.</param>
+            <returns>Returns new cookie policy options.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.HandleSameSiteCookieCompatibility(Microsoft.AspNetCore.Builder.CookiePolicyOptions,System.Func{System.String,System.Boolean})">
+            <summary>
+            Handles SameSite cookie issue according to the docs The default list of user-agents that disallow SameSite None.
+            </summary>
+            <param name="options">Contains existing cookie policies.</param>
+            <param name="disallowsSameSiteNone">
+            If you don't want to use the default user-agent list implementation, the method sent in this parameter will be run against the user-agent and if
+            returned true, SameSite value will be set to Unspecified.
+            </param>
+            <returns>Returns a new Cookie policy.</returns>
+        </member>
+        <member name="M:Bastille.Id.Web.ServiceCollectionExtensions.CheckSameSite(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.CookieOptions,System.Func{System.String,System.Boolean})">
+            <summary>
+            This method is used to check the same site and set Same Site based on browser.
+            </summary>
+            <param name="httpContext">Contains the context.</param>
+            <param name="options">Contains cookie options.</param>
+            <param name="disallowsSameSiteNone">Contains a function used to disallow.</param>
+        </member>
+        <member name="T:Bastille.Id.Web.WebServerSecurityOptions">
+            <summary>
+            This class contains properties for the web server security extension.
+            </summary>
+            <seealso cref="T:Bastille.Id.Web.IdentityProviderOptions" />
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.RedisCacheConfiguration">
+            <summary>
+            Gets or sets the redis cache configuration.
+            </summary>
+            <value>The redis cache configuration. Default is empty and distributed memory cache is used instead.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.ClientResponseType">
+            <summary>
+            Gets or sets the type of the client response used.
+            </summary>
+            <value>The type of the client response used. The authorization code grant type is the default.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.ClientResponseMode">
+            <summary>
+            Gets or sets the client response mode.
+            </summary>
+            <value>The client response mode. Default is form POST.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.ApiResourceName">
+            <summary>
+            Gets or sets the name of the API resource.
+            </summary>
+            <value>The name of the API resource. By default "bastille-id-api" but can be modified by the IdP admin.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.SlidingSessionTimeoutMinutes">
+            <summary>
+            Gets or sets the sliding session timeout minutes.
+            </summary>
+            <value>The sliding session timeout minutes. Default is 20 minutes. Setting to 0 will disable the sliding session.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.Scopes">
+            <summary>
+            Gets or sets additional scopes to request from the client.
+            </summary>
+            <value>
+            Any additional scopes to request for the client web app. The <see cref="P:Bastille.Id.Web.WebServerSecurityOptions.ApiResourceName" /> will always be added. The default contains a "profile" scope.
+            </value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.AuthenticationTicketExpirationMinutes">
+            <summary>
+            Gets or sets the authentication ticket expiration minutes.
+            </summary>
+            <value>The authentication ticket expiration minutes. Default is 60 minutes.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.AllowedOrigins">
+            <summary>
+            Gets or sets the allowed origins that can access the web application.
+            </summary>
+            <value>The allowed origins. No values will set a default * CORS origin setting.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.ForceSsl">
+            <summary>
+            Gets or sets a value indicating whether to always require SSL when optional.
+            </summary>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.DefaultMapInboundClaims">
+            <summary>
+            Gets or sets a value indicating whether the default map inbound claims is used.
+            </summary>
+            <value><c>true</c> if [default map inbound claims]; otherwise, <c>false</c>. The default is <c>false</c>.</value>
+        </member>
+        <member name="P:Bastille.Id.Web.WebServerSecurityOptions.EnableCookieRefreshTokenHandling">
+            <summary>
+            Gets or sets a value indicating whether [enable cookie refresh token handling].
+            </summary>
+            <value><c>true</c> if [enable cookie refresh token handling]; otherwise, <c>false</c>.</value>
         </member>
     </members>
 </doc>

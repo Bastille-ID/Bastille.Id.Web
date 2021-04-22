@@ -5,9 +5,9 @@
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <Authors>Talegen, LLC</Authors>
     <Description>Protected Web Apps and Web API support library for the Bastille.ID Identity Platform.</Description>
     <Copyright>Copyright (c) Talegen, LLC. All rights reserved.</Copyright>
@@ -17,7 +17,7 @@
     <RepositoryUrl>https://github.com/Bastille-ID/Bastille.Id.Web</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>identity</PackageTags>
-    <PackageReleaseNotes>Initial Commit.</PackageReleaseNotes>
+    <PackageReleaseNotes>Changes related to enhancing the startup code for any application implementing Bastille Id Security. Using Best practices for a Razor-pages application, cookie authentication, and OpenIdConnect authentication methods. Lots of baked-in goodness.. Redis cache support. Csp headers, etc.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -35,12 +35,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.14" />
+    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.14.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Talegen.Common.Core" Version="1.0.5" />
+    <PackageReference Include="Vasont.AspnetCore.RedisClient" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

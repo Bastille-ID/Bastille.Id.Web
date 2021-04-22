@@ -95,5 +95,10 @@ namespace Bastille.Id.Web
         /// The preferred user name claim.
         /// </summary>
         internal const string PreferredUserName = "preferred_username";
+
+        /// <summary>
+        /// The cors policy name.
+        /// </summary>
+        internal const string CorsPolicyName = "DefaultCorsPolicy";
     }
 }
