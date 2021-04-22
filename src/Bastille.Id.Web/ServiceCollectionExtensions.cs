@@ -115,7 +115,7 @@ namespace Bastille.Id.Web
         /// <exception cref="ArgumentNullException">
         /// Exception thrown if <paramref name="services" /> or <paramref name="webServerSecurityOptions" /> are null.
         /// </exception>
-        public static IServiceCollection AddWebServerSecurity(IServiceCollection services, WebServerSecurityOptions webServerSecurityOptions, ILogger logger = null, bool development = false)
+        public static IServiceCollection AddWebServerSecurity(this IServiceCollection services, WebServerSecurityOptions webServerSecurityOptions, ILogger logger = null, bool development = false)
         {
             if (services == null)
             {
