@@ -230,37 +230,64 @@ namespace Bastille.Id.Web
                             return Task.CompletedTask;
                         },
 
+                        OnAuthorizationCodeReceived = async codeContext =>
+                        {
+                            Log.Debug("OnAuthorizationCodeReceived: {0}", codeContext.TokenEndpointRequest.Code);
+                        },
+
                         // This event is called after the OIDC middleware received the auhorisation code, redeemed it for an access token and a refresh token,
                         // and validated the identity token
                         OnTokenResponseReceived = validatedContext =>
                         {
                             Log.Debug("Validation OnTokenResponseReceived");
 
-                            // store both access and refresh token in the claims - hence in the cookie
-                            ClaimsIdentity identity = validatedContext.Principal.Identity as ClaimsIdentity;
-
-                            if (!string.IsNullOrEmpty(validatedContext.TokenEndpointResponse.AccessToken))
+                            if (validatedContext != null)
                             {
-                                Log.Debug("OnTokenValidated: AccessToken = {0}", validatedContext.TokenEndpointResponse.AccessToken);
-                                identity.AddClaim(new Claim("access_token", validatedContext.TokenEndpointResponse.AccessToken));
+                                // store both access and refresh token in the claims - hence in the cookie
+                                ClaimsIdentity identity = (validatedContext?.Principal?.Identity ?? validatedContext.HttpContext?.User?.Identity) as ClaimsIdentity;
+
+                                if (!string.IsNullOrEmpty(validatedContext?.TokenEndpointResponse.AccessToken))
+                                {
+                                    Log.Debug("OnTokenValidated: AccessToken = {0}", validatedContext.TokenEndpointResponse.AccessToken);
+
+                                    if (identity != null)
+                                    {
+                                        identity.AddClaim(new Claim("access_token", validatedContext.TokenEndpointResponse.AccessToken));
+                                    }
+                                    else
+                                    {
+                                        Log.Debug("Identity not found in OnTokenResponseReceived, cannot add access_token claim.");
+                                    }
+                                }
+
+                                string refreshToken = !string.IsNullOrEmpty(validatedContext.TokenEndpointResponse.RefreshToken) ?
+                                    validatedContext.TokenEndpointResponse.RefreshToken :
+                                    AsyncHelper.RunSync(() => validatedContext.HttpContext.GetTokenAsync("refresh_token"));
+
+                                if (!string.IsNullOrEmpty(refreshToken))
+                                {
+                                    Log.Debug("OnTokenValidated: RefreshToken = {0}", refreshToken);
+
+                                    if (identity != null)
+                                    {
+                                        identity.AddClaim(new Claim("refresh_token", refreshToken));
+                                    }
+                                    else
+                                    {
+                                        Log.Debug("Identity not found in OnTokenResponseReceived, cannot add refresh_token claim.");
+                                    }
+                                }
+
+                                // so that we don't issue a session cookie but one with a fixed expiration
+                                validatedContext.Properties.IsPersistent = true;
+
+                                // align expiration of the cookie with expiration of the access token
+                                if (validatedContext.ProtocolMessage?.AccessToken != null)
+                                {
+                                    var accessToken = new JwtSecurityToken(validatedContext.ProtocolMessage.AccessToken);
+                                    validatedContext.Properties.ExpiresUtc = accessToken.ValidTo;
+                                }
                             }
-
-                            string refreshToken = !string.IsNullOrEmpty(validatedContext.TokenEndpointResponse.RefreshToken) ?
-                                validatedContext.TokenEndpointResponse.RefreshToken :
-                                AsyncHelper.RunSync(() => validatedContext.HttpContext.GetTokenAsync("refresh_token"));
-
-                            if (!string.IsNullOrEmpty(refreshToken))
-                            {
-                                Log.Debug("OnTokenValidated: RefreshToken = {0}", refreshToken);
-                                identity.AddClaim(new Claim("refresh_token", refreshToken));
-                            }
-
-                            // so that we don't issue a session cookie but one with a fixed expiration
-                            validatedContext.Properties.IsPersistent = true;
-
-                            // align expiration of the cookie with expiration of the access token
-                            var accessToken = new JwtSecurityToken(validatedContext.ProtocolMessage.AccessToken);
-                            validatedContext.Properties.ExpiresUtc = accessToken.ValidTo;
 
                             return Task.CompletedTask;
                         }

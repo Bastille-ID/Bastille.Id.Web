@@ -16,7 +16,9 @@
 
 namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
 {
+    using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading.Tasks;
     using Bastille.Id.Web;
     using Bastille.Id.Web.AppServices;
@@ -60,7 +62,7 @@ namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
         public IActionResult SignIn([FromRoute] string scheme)
         {
             scheme ??= OpenIdConnectDefaults.AuthenticationScheme;
-            string redirectUrl = this.Url.Content("~/");
+            string redirectUrl = this.BuildAbsoluteUrl("~/");
             return this.Challenge(new AuthenticationProperties { RedirectUri = redirectUrl }, scheme);
         }
 
@@ -121,7 +123,7 @@ namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
             else
             {
                 scheme ??= OpenIdConnectDefaults.AuthenticationScheme;
-                string callbackUrl = this.Url.Content("~/");
+                string callbackUrl = this.BuildAbsoluteUrl("~/");
                 actionResult = this.SignOut(
                     new AuthenticationProperties
                     {
@@ -144,7 +146,7 @@ namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
         {
             scheme ??= OpenIdConnectDefaults.AuthenticationScheme;
 
-            var redirectUrl = this.Url.Content("~/");
+            var redirectUrl = this.BuildAbsoluteUrl("~/");
             var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
             properties.Items[Constants.Policy] = this.options.Value?.ResetPasswordPolicyId;
             return this.Challenge(properties, scheme);
@@ -164,7 +166,7 @@ namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
 
             if (authenticated.Succeeded)
             {
-                string redirectUrl = this.Url.Content("~/");
+                string redirectUrl = this.BuildAbsoluteUrl("~/");
                 AuthenticationProperties properties = new AuthenticationProperties { RedirectUri = redirectUrl };
                 properties.Items[Constants.Policy] = this.options.Value?.EditProfilePolicyId;
                 actionResult = this.Challenge(properties, scheme);
@@ -175,6 +177,23 @@ namespace Bastille.Id.Web.UI.Areas.BastilleIdentity.Controllers
             }
 
             return actionResult;
+        }
+
+        /// <summary>
+        /// This method is used to build an absolute URL to a specified path.
+        /// </summary>
+        /// <param name="path">Contains the path to include in the absolute URL.</param>
+        /// <returns>Returns the absolute URL.</returns>
+        public string BuildAbsoluteUrl(string path)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            string baseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}/", this.HttpContext.Request.Scheme, this.HttpContext.Request.Host);
+
+            return path.Contains("~/", StringComparison.InvariantCultureIgnoreCase) ? path.Replace("~/", baseUrl, true, CultureInfo.InvariantCulture) : baseUrl + path;
         }
     }
 }

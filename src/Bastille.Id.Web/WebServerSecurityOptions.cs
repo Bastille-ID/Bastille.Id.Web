@@ -37,7 +37,7 @@ namespace Bastille.Id.Web
         /// <summary>
         /// Gets or sets the type of the client response used.
         /// </summary>
-        /// <value>The type of the client response used. The authorization code grant type is the default.</value>
+        /// <value>The type of the client response used. The hybrid grant type is the default.</value>
         public string ClientResponseType { get; set; } = OpenIdConnectResponseType.Code;
 
         /// <summary>

@@ -11,10 +11,10 @@
     <RepositoryUrl>https://github.com/Bastille-ID/Bastille.Id.Web</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>identity</PackageTags>
-    <PackageReleaseNotes>Initial commit.</PackageReleaseNotes>
+    <PackageReleaseNotes>fixes and updates to redirect urls.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>

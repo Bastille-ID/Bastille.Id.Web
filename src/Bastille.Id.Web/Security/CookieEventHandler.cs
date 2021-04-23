@@ -79,8 +79,15 @@ namespace Bastille.Id.Web.Security
             Claim accessTokenClaim = identity.FindFirst("access_token");
             Claim refreshTokenClaim = identity.FindFirst("refresh_token");
 
-            Log.Debug("Cookie OnValidatePrincipal: Access Token: {0}", accessTokenClaim.Value);
-            Log.Debug("Cookie OnValidatePrincipal: Refresh Token: {0}", refreshTokenClaim.Value);
+            if (accessTokenClaim != null)
+            {
+                Log.Debug("Cookie OnValidatePrincipal: Access Token: {0}", accessTokenClaim.Value);
+            }
+
+            if (refreshTokenClaim != null)
+            {
+                Log.Debug("Cookie OnValidatePrincipal: Refresh Token: {0}", refreshTokenClaim.Value);
+            }
 
             // at first, determine if user has been logged out...
             if (identity.IsAuthenticated)
@@ -104,7 +111,7 @@ namespace Bastille.Id.Web.Security
                 }
             }
 
-            if (!signedOut)
+            if (!signedOut && accessTokenClaim != null)
             {
                 JwtSecurityToken tokenFound = new JwtSecurityToken(accessTokenClaim.Value);
 
